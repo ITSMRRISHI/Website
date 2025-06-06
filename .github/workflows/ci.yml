@@ -1,0 +1,51 @@
+name: ElectroMart Homepage CI
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches: [ main ]
+  # Alternatively, you can trigger the workflow on pull requests:
+  # pull_request:
+  #   branches: [ main ]
+
+# Define the jobs that will run in the CI pipeline
+jobs:
+  # Job for linting the CSS file
+  lint:
+    # This job will run on the latest Ubuntu environment
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js for using npm (needed for stylelint)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Use Node.js version 16
+
+      # Install the necessary npm dependencies (stylelint, stylelint-config-standard)
+      - name: Install npm dependencies
+        run: |
+          npm install --save-dev stylelint stylelint-config-standard
+
+      # Run the stylelint command to lint the styles.css file
+      - name: Lint CSS file
+        run: npx stylelint styles.css  # Linting the styles.css file
+
+  # Job for simulating the deployment (you can extend this to a real deployment later)
+  deploy:
+    # This job runs after the linting job passes successfully
+    runs-on: ubuntu-latest
+    needs: lint  # This job will only run if the lint job succeeds
+
+    steps:
+      # Checkout the code again
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Simulate the deployment (you can replace this with actual deployment steps)
+      - name: Deploy to Staging (Simulated)
+        run: echo "Deployment to staging successful!"  # Simulate deployment
