@@ -1,3 +1,10 @@
+/* Apply box-sizing to all elements for consistent sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* General styling for the body */
 body {
     font-family: Arial, sans-serif;
@@ -9,8 +16,8 @@ body {
 /* Header styles */
 header {
     background-color: #333;
-    color: white;
-    padding: 20px;
+    color: #fff;
+    padding: 20px 0;
     text-align: center;
 }
 
@@ -22,7 +29,7 @@ header {
 }
 
 .product {
-    background-color: white;
+    background-color: #fff;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
@@ -41,11 +48,18 @@ header {
     color: #333;
 }
 
+/* Add a focus state for accessibility */
+.product:focus,
+.product img:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
 /* Footer styles */
 footer {
     background-color: #333;
-    color: white;
-    padding: 10px;
+    color: #fff;
+    padding: 10px 0;
     text-align: center;
     position: fixed;
     width: 100%;
