@@ -1,15 +1,12 @@
-name: ElectroMart Homepage CI
+name: wsebsite
 
 on:
   push:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,22 +20,5 @@ jobs:
         run: |
           npm install --save-dev stylelint stylelint-config-standard
 
-      # First, try auto-fixing errors
-      - name: Lint and auto-fix CSS file
-        run: npx stylelint styles.css --fix
-
-      # Optionally, check again and fail if unfixable errors remain
-      - name: Fail if lint errors remain
-        run: npx stylelint styles.css
-        continue-on-error: false
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: lint
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to Staging (Simulated)
-        run: echo "Deployment to staging successful!"
+      - name: Lint CSS file and auto-fix
+        run: npx stylelint styles.css --fix  # Automatically fix linting errors
